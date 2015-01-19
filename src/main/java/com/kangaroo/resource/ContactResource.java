@@ -1,15 +1,11 @@
 package com.kangaroo.resource;
 
-import com.kangaroo.lucen.Index;
 import com.kangaroo.model.Contact;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.UriInfo;
-import java.io.IOException;
-import java.sql.SQLException;
 
 import static com.kangaroo.utility.Constants.FAIL_MSG;
 import static com.kangaroo.utility.Constants.SUCCESS_MSG;
