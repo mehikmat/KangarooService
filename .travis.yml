@@ -1,1 +1,4 @@
-lnguage: java
+language: java
+notifications:
+email:
+- me.hemant.available@gmail.com
