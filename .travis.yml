@@ -1,4 +1,4 @@
 language: java
 notifications:
-email:
-- me.hemant.available@gmail.com
+  email:
+    - me.hemant.available@gmail.com
