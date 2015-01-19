@@ -6,6 +6,7 @@ import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.client.ClientResponse;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.ws.rs.client.Client;
@@ -31,6 +32,7 @@ public class KangarooRestServiceTest extends TestCase {
        server.shutdownNow();
     }
 
+    @Ignore
     @Test
     public void testGetIt() {
             WebTarget target = client.target(com.kangaroo.HttpTestServer.BASE_URI+"api/auth");
