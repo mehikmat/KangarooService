@@ -53,11 +53,13 @@
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-client</artifactId>
             <version>2.11</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-grizzly2-http</artifactId>
             <version>2.11</version>
+            <scope>test</scope>
         </dependency>
 
         <!--JUnit-->
@@ -68,8 +70,8 @@
             <scope>test</scope>
         </dependency>
 
-        <!--Embeded Tomcat-->
-         <dependency>
+        <!--Embeded Tomcat for running on heroku-->
+         <!--<dependency>
              <groupId>org.apache.tomcat.embed</groupId>
              <artifactId>tomcat-embed-core</artifactId>
              <version>${tomcat.version}</version>
@@ -98,7 +100,15 @@
              <groupId>org.apache.tomcat</groupId>
              <artifactId>tomcat-jsp-api</artifactId>
              <version>${tomcat.version}</version>
-         </dependency>
+         </dependency>-->
+
+        <!--HyperSQLDB dependency-->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -118,6 +128,8 @@
                     <target>1.6</target>
                 </configuration>
             </plugin>
+
+            <!--for generating heroku bash file-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>appassembler-maven-plugin</artifactId>

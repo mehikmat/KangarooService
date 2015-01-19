@@ -1,14 +1,13 @@
 package com.kangaroo.resource;
 
 import com.kangaroo.model.Auth;
-import com.kangaroo.utility.DBConnector;
+import com.kangaroo.utility.DBConnection;
+import com.kangaroo.utility.HSqlDbConnection;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import static com.kangaroo.utility.Constants.*;
 
@@ -87,6 +86,8 @@ public class AuthResource {
 
     // check if user exists in database
     private boolean validateUser(Auth auth) {
+        DBConnection dbConnection = new HSqlDbConnection();
+        Connection connection = dbConnection.getConnection();
         return true;
     }
 
