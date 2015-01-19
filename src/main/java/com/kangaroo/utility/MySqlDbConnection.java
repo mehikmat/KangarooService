@@ -20,6 +20,7 @@ public class MySqlDbConnection implements DBConnection {
         setUserName(resource.getString("username"));
         setPassWord(resource.getString("password"));
     }
+
     public String getDriverName() {
         return driverName;
     }
