@@ -1,4 +1,4 @@
-KangarooService
+KangarooService   [![Build Status](https://travis-ci.org/mehikmat/KangarooService.svg?branch=master)](https://travis-ci.org/mehikmat/KangarooService)
 ===============
 
 Web Services for Kangaroo Android Apllication (https://github.com/mehikmat/Kangaroo)
