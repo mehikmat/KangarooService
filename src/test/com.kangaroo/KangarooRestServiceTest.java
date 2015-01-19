@@ -32,6 +32,7 @@ public class KangarooRestServiceTest extends TestCase {
        server.shutdownNow();
     }
 
+    /*ignoring test */
     @Ignore
     @Test
     public void testGetIt() {
