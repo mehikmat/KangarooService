@@ -1,12 +1,14 @@
 package com.kangaroo.resource;
 
 import com.kangaroo.model.Auth;
-import com.kangaroo.utility.DBConnection;
 import com.kangaroo.utility.HSqlDbConnection;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.*;
-import java.sql.Connection;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Request;
+import javax.ws.rs.core.UriInfo;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static com.kangaroo.utility.Constants.*;
@@ -49,11 +51,10 @@ public class AuthResource {
      client needs to post json as string, posted json string will be converted into
      “Auth” object automatically.*/
     @POST
-    @Path("/check")
+    @Path("/validate")
     @Consumes("application/json")
     @Produces("application/json")
-    public String authCustomer(final Auth auth) throws SQLException, ClassNotFoundException,
-            InstantiationException, IllegalAccessException {
+    public String authCustomer(final Auth auth) {
 
         if (auth == null){
             return "customer id or password is empty";
@@ -67,11 +68,10 @@ public class AuthResource {
     }
 
     @POST
-    @Path("create")
+    @Path("/add")
     @Consumes("application/json")
     @Produces("text/plain")
-    public String createCustomer(Auth auth) throws SQLException, ClassNotFoundException,
-            InstantiationException, IllegalAccessException {
+    public String createCustomer(Auth auth){
 
         if (auth == null){
             return "customer id or password is empty";
@@ -86,13 +86,30 @@ public class AuthResource {
 
     // check if user exists in database
     private boolean validateUser(Auth auth) {
-        DBConnection dbConnection = new HSqlDbConnection();
-        Connection connection = dbConnection.getConnection();
-        return true;
+        String selectCustomer = "select * from auth where customerId=? and password=?";
+        PreparedStatement statement = HSqlDbConnection.getStatement(selectCustomer);
+        try {
+            statement.setString(1,auth.getCustomerId());
+            statement.setString(2,auth.getPassword());
+            ResultSet resultSet = statement.executeQuery();
+            return resultSet.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e.getLocalizedMessage());
+        }
     }
 
-    // index new user
+    // inset new customer
     private boolean addCustomer(Auth auth){
-        return true;
+        String insertCustomer = "insert into auth (customerId,password) " + "values(?,?)";
+        PreparedStatement statement = HSqlDbConnection.getStatement(insertCustomer);
+        try {
+            statement.setString(1,auth.getCustomerId());
+            statement.setString(2,auth.getPassword());
+            return !statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e.getLocalizedMessage());
+        }
     }
 }

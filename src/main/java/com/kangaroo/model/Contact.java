@@ -31,7 +31,8 @@ public class Contact implements Serializable {
 
     public Contact() {}
 
-    public Contact(String contactName, String contactNumber) {
+    public Contact(String customerId ,String contactName, String contactNumber) {
+        this.setCustomerId(customerId);
         this.setContactName(contactName);
         this.setContactNumber(contactNumber);
     }

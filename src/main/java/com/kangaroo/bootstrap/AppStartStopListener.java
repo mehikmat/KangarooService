@@ -34,7 +34,7 @@ public class AppStartStopListener implements ServletContextListener {
         DBConnection dbConnection = new HSqlDbConnection();
         // open database
         Connection connection = dbConnection.getConnection();
-        System.out.println("database created!");
+        System.out.println("database k_contact opened!");
         // create tables
         try {
             Statement statement = connection.createStatement();
@@ -47,34 +47,38 @@ public class AppStartStopListener implements ServletContextListener {
     }
 
     private void createTables(Statement statement) throws SQLException {
-        String demoCustomer = "insert into auth (customerId,password) " + "values('demo','demo')";
+        String demoCustomer = "insert into customer (customerId,customerName) " + "values('demo','demo')";
+        String demoContact = "insert into contact (customerId,contactName,contactNumber) " + "values('demo','demo','1010101010')";
+        String demoAuth = "insert into auth (customerId,password) " + "values('demo','demo')";
 
         String tableAuth = "create table if not exists auth (" +
-                          "id INTEGER IDENTITY," +
-                          "customerId varchar ( 10 )," +
-                          "password varchar(10)" +
-                       ")";
-        String tableCustomer = "create table if not exists auth (" +
-                          "id INTEGER IDENTITY," +
-                          "customerId varchar ( 10 )," +
-                          "customerName varchar(10)" +
-                       ")";
-        String tableContact = "create table if not exists auth (" +
-                          "id INTEGER IDENTITY," +
-                          "customerId varchar ( 10 )," +
-                          "contactName varchar(10)," +
-                          "contactNumber varchar(10)" +
-                       ")";
+                "id INTEGER IDENTITY," +
+                "customerId varchar ( 10 )," +
+                "password varchar(10)" +
+                ")";
+        String tableCustomer = "create table if not exists customer (" +
+                "id INTEGER IDENTITY," +
+                "customerId varchar ( 10 )," +
+                "customerName varchar(20)" +
+                ")";
+        String tableContact = "create table if not exists contact (" +
+                "id INTEGER IDENTITY," +
+                "customerId varchar ( 10 )," +
+                "contactName varchar(20)," +
+                "contactNumber varchar(20)" +
+                ")";
 
-        statement.execute(tableAuth);
-        statement.execute(demoCustomer);
-        System.out.println("Table auth created !");
+        if(!statement.execute(tableAuth)  && !statement.execute(demoAuth)){
+            System.out.println("Table auth created !");
+        }
 
-        statement.execute(tableCustomer);
-        System.out.println("Table customer created !");
+        if(!statement.execute(tableCustomer) && !statement.execute(demoCustomer)){
+            System.out.println("Table customer created !");
+        }
 
-        statement.execute(tableContact);
-        System.out.println("Table contact created !");
+        if(!statement.execute(tableContact) && !statement.execute(demoContact)){
+            System.out.println("Table contact created !");
+        }
     }
 
     private void destroyApp(){

@@ -1,10 +1,6 @@
 package com.kangaroo.utility;
 
-import javax.swing.plaf.nimbus.State;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ResourceBundle;
 
 public class HSqlDbConnection implements DBConnection{
@@ -59,31 +55,30 @@ public class HSqlDbConnection implements DBConnection{
             Class.forName(getDriverName()).newInstance();
             dbConnection = DriverManager.getConnection(getHostName(),
                     getUserName(), getPassWord());
-            dbConnection.setAutoCommit(false);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e.getLocalizedMessage());
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e.getLocalizedMessage());
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e.getLocalizedMessage());
-        } catch (IllegalAccessException e) {
+            dbConnection.setAutoCommit(true);
+        } catch (ClassNotFoundException | SQLException | InstantiationException |
+                IllegalAccessException e) {
             e.printStackTrace();
             throw new RuntimeException(e.getLocalizedMessage());
         }
         return dbConnection;
     }
 
-    public Statement getStatement(){
-        Statement statement;
+    public static PreparedStatement getStatement(String stmt) {
         try {
-           statement = dbConnection.createStatement();
+            return new HSqlDbConnection().getConnection().prepareStatement(stmt);
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e.getLocalizedMessage());
         }
-        return statement;
+    }
+
+    public static Statement getStatement() {
+        try {
+            return new HSqlDbConnection().getConnection().createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e.getLocalizedMessage());
+        }
     }
 }

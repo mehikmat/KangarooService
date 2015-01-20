@@ -1,0 +1,10 @@
+/*C3*/SET SCHEMA PUBLIC
+create table if not exists auth (id INTEGER IDENTITY,customerId varchar ( 10 ),password varchar(10))
+INSERT INTO AUTH VALUES(6,'demo','demo')
+COMMIT
+create table if not exists customer (id INTEGER IDENTITY,customerId varchar ( 10 ),customerName varchar(20))
+INSERT INTO CUSTOMER VALUES(5,'demo','demo')
+COMMIT
+create table if not exists contact (id INTEGER IDENTITY,customerId varchar ( 10 ),contactName varchar(20),contactNumber varchar(20))
+INSERT INTO CONTACT VALUES(6,'demo','demo','1010101010')
+COMMIT

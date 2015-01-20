@@ -10,7 +10,10 @@ Android Based Application can use this system to store contacts and to re-store 
 
 Technologies: Java, JSP, Servlet, JAX-RS, Jersey, HyperSQLDB,JSON,XML
 
-
+View HDSQLDB in GUI
+```
+java -cp target/repo/org/hsqldb/hsqldb/2.3.1/hsqldb-2.3.1.jar org.hsqldb.util.DatabaseManagerSwing
+```
 HSQLDB
 -------
 HSQLDB comes in a jar named hsqldb.jar
@@ -58,9 +61,15 @@ to connect to the database from outside your application.
 As a result you cannot check the contents of the database with external tools such
 as Database Manager while your application is running.
 
+API EndPoints:
+----------------
+ - /api/auth/validate  for authentication purpose- sign in
+ - /api/auth/add       for adding new customer- sign up
+ - /api/contact/add    for adding new contact
+ - /api/contact/list   for getting list of contacts
+ - /api/customer/add   for adding new customer
 
-
-
+ NOTE: All of the above endpoints are POST endpoints and MIME type JSON
 
 
 
