@@ -34,6 +34,7 @@ public class AppStartStopListener implements ServletContextListener {
         DBConnection dbConnection = new HSqlDbConnection();
         // open database
         Connection connection = dbConnection.getConnection();
+        System.out.println("database created!");
         // create tables
         try {
             Statement statement = connection.createStatement();
@@ -46,14 +47,34 @@ public class AppStartStopListener implements ServletContextListener {
     }
 
     private void createTables(Statement statement) throws SQLException {
-        String table = "create table if not exists auth (" +
+        String demoCustomer = "insert into auth (customerId,password) " + "values('demo','demo')";
+
+        String tableAuth = "create table if not exists auth (" +
+                          "id INTEGER IDENTITY," +
                           "customerId varchar ( 10 )," +
-                          "password varchar(10)," +
+                          "password varchar(10)" +
                        ")";
-        String demoCustomer = "";
-        statement.execute(table);
+        String tableCustomer = "create table if not exists auth (" +
+                          "id INTEGER IDENTITY," +
+                          "customerId varchar ( 10 )," +
+                          "customerName varchar(10)" +
+                       ")";
+        String tableContact = "create table if not exists auth (" +
+                          "id INTEGER IDENTITY," +
+                          "customerId varchar ( 10 )," +
+                          "contactName varchar(10)," +
+                          "contactNumber varchar(10)" +
+                       ")";
+
+        statement.execute(tableAuth);
         statement.execute(demoCustomer);
-        System.out.println("Table created !");
+        System.out.println("Table auth created !");
+
+        statement.execute(tableCustomer);
+        System.out.println("Table customer created !");
+
+        statement.execute(tableContact);
+        System.out.println("Table contact created !");
     }
 
     private void destroyApp(){
