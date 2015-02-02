@@ -60,9 +60,9 @@ public class CustomerResource {
         }
     }
 
-    // index customer
+    // add new customer
     private boolean insertCustomer(final  Customer customer) {
-        String insertCustomer = "insert into auth (customerId,customerName) " + "values(?,?)";
+        String insertCustomer = "insert into customer (customerId,customerName) " + "values(?,?)";
         PreparedStatement statement = HSqlDbConnection.getStatement(insertCustomer);
         try {
             statement.setString(1,customer.getCustomerId());
