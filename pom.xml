@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.kangaroo</groupId>
-    <artifactId>kangaroo-service</artifactId>
+    <artifactId>kangarooservice</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
-    <name>kangaroo-service</name>
+    <name>Backend for kangaroo Mobile App</name>
 
     <properties>
         <tomcat.version>7.0.34</tomcat.version>
@@ -61,7 +61,6 @@
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-client</artifactId>
             <version>2.11</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
@@ -120,12 +119,17 @@
     </dependencies>
 
     <build>
+        <finalName>ROOT</finalName>
         <plugins>
             <!-- For running maven based embedded Tomcat -->
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.0</version>
+                <!--Set tomcat context path default /${project.artifactId}-->
+                <configuration>
+                    <path>/</path>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

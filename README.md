@@ -10,6 +10,18 @@ Android Based Application can use this system to store contacts and to re-store 
 
 Technologies: Java, JSP, Servlet, JAX-RS, Jersey, HyperSQLDB,JSON,XML
 
+How to deploy?
+---------------
+```
+$> git clone https://github.com/mehikmat/KangarooService.git
+$> cd kangarooservice
+$> mvn clean package
+$> mvn tomcat7:run
+     OR
+     
+just copy the target/ROOT.war file to your own server
+
+```
 View HDSQLDB in GUI
 ```
 java -cp target/repo/org/hsqldb/hsqldb/2.3.1/hsqldb-2.3.1.jar org.hsqldb.util.DatabaseManagerSwing
