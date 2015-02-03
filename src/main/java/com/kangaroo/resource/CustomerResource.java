@@ -92,14 +92,14 @@ public class CustomerResource {
     @GET
     @Path("/list")
     @Produces("application/json")
-    public List<Customer> listContact() {
+    public List<Customer> listCustomer() {
        return getCustomerList();
     }
 
     // get list of customers
     private List<Customer> getCustomerList(){
-        String selectContact = "select * from customer";
-        PreparedStatement statement = HSqlDbConnection.getStatement(selectContact);
+        String selectCustomer = "select * from customer";
+        PreparedStatement statement = HSqlDbConnection.getStatement(selectCustomer);
         try {
             ResultSet resultSet = statement.executeQuery();
             List<Customer> list = new ArrayList<>();
