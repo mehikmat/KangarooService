@@ -1,7 +1,8 @@
 package com.kangaroo.resource;
 
 import com.kangaroo.model.Auth;
-import com.kangaroo.utility.HSqlDbConnection;
+import com.kangaroo.model.Response;
+import com.kangaroo.util.HSqlDbConnection;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -11,7 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static com.kangaroo.utility.Constants.*;
+import static com.kangaroo.util.Constants.*;
 
 @Path("/auth")
 public class AuthResource {
@@ -34,9 +35,9 @@ public class AuthResource {
 
     // Basic "is the service running" test
     @GET
-    @Produces("text/plain")
-    public String respondAsReady() {
-        return "Service is up... :)";
+    @Produces("application/json")
+    public Response respondAsReady() {
+        return new Response("Service is up!!!");
     }
 
     @GET
@@ -54,33 +55,32 @@ public class AuthResource {
     @Path("/validate")
     @Consumes("application/json")
     @Produces("application/json")
-    public String authCustomer(final Auth auth) {
+    public Response authCustomer(final Auth auth) {
 
         if (auth == null){
-            return "customer id or password is empty";
+            return new Response("customer id or password is empty");
         }
 
         if (validateUser(auth)){
-            return AUTHENTICATED;
+            return new Response(AUTHENTICATED);
         }else {
-            return NOT_AUTHENTICATED;
+            return new Response(NOT_AUTHENTICATED);
         }
     }
 
     @POST
     @Path("/add")
     @Consumes("application/json")
-    @Produces("text/plain")
-    public String createCustomer(Auth auth){
-
+    @Produces("application/json")
+    public Response createCustomer(Auth auth){
         if (auth == null){
-            return "customer id or password is empty";
+            return new Response("customer id or password is empty");
         }
 
         if (addCustomer(auth)){
-            return SUCCESS_MSG;
+            return new Response(SUCCESS_MSG);
         }else {
-           return FAIL_MSG;
+           return new Response(FAIL_MSG);
         }
     }
 

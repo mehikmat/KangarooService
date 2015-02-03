@@ -10,7 +10,7 @@
     </welcome-file-list>
 
     <servlet>
-        <servlet-name>kangaroo-service</servlet-name>
+        <servlet-name>kangarooservice</servlet-name>
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
@@ -28,7 +28,7 @@
     </listener>
 
     <servlet-mapping>
-        <servlet-name>kangaroo-service</servlet-name>
+        <servlet-name>kangarooservice</servlet-name>
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
 

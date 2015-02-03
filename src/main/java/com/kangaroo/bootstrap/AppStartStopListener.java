@@ -1,7 +1,7 @@
 package com.kangaroo.bootstrap;
 
-import com.kangaroo.utility.DBConnection;
-import com.kangaroo.utility.HSqlDbConnection;
+import com.kangaroo.util.DBConnection;
+import com.kangaroo.util.HSqlDbConnection;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -47,19 +47,22 @@ public class AppStartStopListener implements ServletContextListener {
     }
 
     private void createTables(Statement statement) throws SQLException {
-        String demoCustomer = "insert into customer (customerId,customerName) " + "values('demo','demo')";
+        String demoCustomer = "insert into customer (customerId,password) " + "values('demo','demo')";
         String demoContact = "insert into contact (customerId,contactName,contactNumber) " + "values('demo','demo','1010101010')";
         String demoAuth = "insert into auth (customerId,password) " + "values('demo','demo')";
 
+        // this is for web admin
         String tableAuth = "create table if not exists auth (" +
                 "id INTEGER IDENTITY," +
                 "customerId varchar ( 10 )," +
                 "password varchar(10)" +
                 ")";
+
+        // this is for mobile login
         String tableCustomer = "create table if not exists customer (" +
                 "id INTEGER IDENTITY," +
                 "customerId varchar ( 10 )," +
-                "customerName varchar(20)" +
+                "password varchar(20)" +
                 ")";
         String tableContact = "create table if not exists contact (" +
                 "id INTEGER IDENTITY," +

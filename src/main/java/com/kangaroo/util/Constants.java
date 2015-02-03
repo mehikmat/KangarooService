@@ -1,4 +1,4 @@
-package com.kangaroo.utility;
+package com.kangaroo.util;
 
 /**
  * @author Hikamt Dhamee

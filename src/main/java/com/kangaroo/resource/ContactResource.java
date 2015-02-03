@@ -1,8 +1,8 @@
 package com.kangaroo.resource;
 
-import com.kangaroo.model.Contact;
-import com.kangaroo.model.Customer;
-import com.kangaroo.utility.HSqlDbConnection;
+import com.kangaroo.model.*;
+import com.kangaroo.model.Response;
+import com.kangaroo.util.HSqlDbConnection;
 import jersey.repackaged.com.google.common.collect.Lists;
 
 import javax.ws.rs.*;
@@ -14,8 +14,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.kangaroo.utility.Constants.FAIL_MSG;
-import static com.kangaroo.utility.Constants.SUCCESS_MSG;
+import static com.kangaroo.util.Constants.FAIL_MSG;
+import static com.kangaroo.util.Constants.SUCCESS_MSG;
 
 @Path("/contact")
 public class ContactResource {
@@ -36,10 +36,17 @@ public class ContactResource {
     Request request;
 
     // Basic "is the service running" test
+    // Basic "is the service running" test
+    @GET
+    @Produces("application/json")
+    public Response respondAsReady() {
+        return new Response("Service is up!!!");
+    }
+
     @GET
     @Path("/demo")
     @Produces("application/json")
-    public Contact respondAsReady() {
+    public Contact getDemoContact() {
         return demoContact;
     }
 
@@ -47,17 +54,17 @@ public class ContactResource {
     @POST
     @Path("/add")
     @Consumes("application/json")
-    @Produces("text/plain")
-    public String addContact(final Contact contact ) {
+    @Produces("application/json")
+    public Response addContact(final Contact contact ) {
 
         if (contact == null){
-            return "Contact is empty";
+            return  new Response("Contact is empty");
         }
 
         if(insertContact(contact)){
-            return SUCCESS_MSG;
+            return new Response(SUCCESS_MSG);
         }else {
-            return FAIL_MSG;
+            return new Response(FAIL_MSG);
         }
     }
 
@@ -86,7 +93,6 @@ public class ContactResource {
                 list.add(new Contact(customer.getCustomerId(),resultSet.getString("contactName"),
                         resultSet.getString("contactNumber")));
             }
-            System.out.println("Returning>>> "+Lists.newArrayList(list));
             return Lists.newArrayList(list);
         } catch (SQLException e) {
             e.printStackTrace();

@@ -1,16 +1,10 @@
-/*C1*/SET SCHEMA SYSTEM_LOBS
-INSERT INTO BLOCKS VALUES(0,2147483647,0)
-COMMIT
-/*C2*/SET SCHEMA PUBLIC
+/*C4*/SET SCHEMA PUBLIC
 create table if not exists auth (id INTEGER IDENTITY,customerId varchar ( 10 ),password varchar(10))
-INSERT INTO AUTH VALUES(0,'demo','demo')
+INSERT INTO AUTH VALUES(8,'demo','demo')
 COMMIT
-create table if not exists customer (id INTEGER IDENTITY,customerId varchar ( 10 ),customerName varchar(20))
-INSERT INTO CUSTOMER VALUES(0,'demo','demo')
+create table if not exists customer (id INTEGER IDENTITY,customerId varchar ( 10 ),password varchar(20))
+INSERT INTO CUSTOMER VALUES(11,'demo','demo')
 COMMIT
 create table if not exists contact (id INTEGER IDENTITY,customerId varchar ( 10 ),contactName varchar(20),contactNumber varchar(20))
-INSERT INTO CONTACT VALUES(0,'demo','demo','1010101010')
-COMMIT
-/*C3*/SET SCHEMA PUBLIC
-INSERT INTO CUSTOMER VALUES(1,'15','ak')
+INSERT INTO CONTACT VALUES(8,'demo','demo','1010101010')
 COMMIT
